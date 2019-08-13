@@ -1,0 +1,22 @@
+{
+ "Servers": [
+  {
+   "Addres": "server1",
+   "Ssl_grade": "B",
+   "Country": "US",
+   "Owner": "Amazon.com, Inc."
+  },
+  {
+   "Addres": "server2",
+   "Ssl_grade": "A+",
+   "Country": "US",
+   "Owner": "Amazon.com, Inc."
+  },
+  {
+   "Addres": "server3",
+   "Ssl_grade": "A",
+   "Country": "US",
+   "Owner": "Amazon.com, Inc."
+  }
+ ]
+}
