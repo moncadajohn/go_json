@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/http"
 )
 
 type Datos struct {
@@ -23,31 +24,36 @@ type Employee struct {
 }
 
 func main() {
-	data := Employee{
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		data := Employee{
 
-		Servers: []Datos{
-			Datos{
-				Addres:    "server1",
-				Ssl_grade: "B",
-				Country:   "US",
-				Owner:     "Amazon.com, Inc.",
+			Servers: []Datos{
+				Datos{
+					Addres:    "server1",
+					Ssl_grade: "B",
+					Country:   "US",
+					Owner:     "Amazon.com, Inc.",
+				},
+				Datos{
+					Addres:    "server2",
+					Ssl_grade: "A+",
+					Country:   "US",
+					Owner:     "Amazon.com, Inc.",
+				},
+				Datos{
+					Addres:    "server3",
+					Ssl_grade: "A",
+					Country:   "US",
+					Owner:     "Amazon.com, Inc.",
+				},
 			},
-			Datos{
-				Addres:    "server2",
-				Ssl_grade: "A+",
-				Country:   "US",
-				Owner:     "Amazon.com, Inc.",
-			},
-			Datos{
-				Addres:    "server3",
-				Ssl_grade: "A",
-				Country:   "US",
-				Owner:     "Amazon.com, Inc.",
-			},
-		},
-	}
+		}
 
-	file, _ := json.MarshalIndent(data, "", " ")
+		file, _ := json.MarshalIndent(data, "", " ")
 
-	_ = ioutil.WriteFile("test.json", file, 0644)
+		_ = ioutil.WriteFile("test.json", file, 0644)
+		json.NewEncoder(w).Encode(data)
+
+	})
+	http.ListenAndServe(":8000", nil)
 }
